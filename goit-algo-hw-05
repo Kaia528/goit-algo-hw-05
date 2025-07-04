@@ -1,0 +1,49 @@
+#1 Home work 1
+
+def caching_fibonacci():
+    
+    cache = {}
+
+    
+    def fibonacci(n):
+        if n <= 0:
+            return 0
+        if n == 1:
+            return 1
+        if n in cache:
+            return cache[n]
+
+        
+        cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
+        return cache[n]
+
+    return fibonacci
+
+
+fib = caching_fibonacci()
+
+print(fib(50))   
+print(fib(22))   
+
+#2 Home work 2
+
+import re
+from typing import Generator, Callable
+
+def generator_numbers(text: str) -> Generator[float, None, None]:
+    pattern = r'\s\d+\.\d+\s'
+    matches = re.findall(pattern, f' {text} ') 
+    for match in matches:
+        yield float(match.strip())
+
+def sum_profit(text: str, func: Callable[[str], Generator[float, None, None]]) -> float:
+    return sum(func(text))
+
+text = (
+    "Загальний дохід працівника складається з декількох частин: "
+    "900.01 як основний дохід, доповнений додатковими надходженнями "
+    "28.45 і 335.00 доларів."
+)
+
+total_income = sum_profit(text, generator_numbers)
+print(f"Загальний дохід: {total_income}")
