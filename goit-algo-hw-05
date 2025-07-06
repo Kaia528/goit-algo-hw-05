@@ -31,10 +31,10 @@ import re
 from typing import Generator, Callable
 
 def generator_numbers(text: str) -> Generator[float, None, None]:
-    pattern = r'\s\d+\.\d+\s'
-    matches = re.findall(pattern, f' {text} ') 
+    pattern = r"\d+\.\d+|\d+"
+    matches = re.findall(pattern, text)
     for match in matches:
-        yield float(match.strip())
+        yield float(match)
 
 def sum_profit(text: str, func: Callable[[str], Generator[float, None, None]]) -> float:
     return sum(func(text))
