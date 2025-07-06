@@ -50,9 +50,6 @@ def get_all(args, contacts):
     return "\n".join([f"{name}: {phone}" for name, phone in contacts.items()])
 
 
-def main():
-    contacts = {}
-    print("Welcome to the assistant bot!")
 
 def main():
     contacts = {}
